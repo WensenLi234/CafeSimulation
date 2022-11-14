@@ -1,6 +1,5 @@
 CafeSimulation class:
    - Imports:
-       - The abstract Dictionary class
        - The Hashtable class for key-value pairs in arrays.
    - Variables:
        - private int difficulty set to 0 by default, which will be used to determine how hard the game will be.
@@ -38,9 +37,9 @@ CafeSimulationRunner class:
        - Prompt the user for a difficulty from 1 to 3
        - Construct a new instance of CafeSimulation called 'cafeSimulation' with the user input as the argument to the 'difficulty' parameter.
        - Loop through the following until the output of the getBank method in cafeSimulation is below or equal to 0:
-            - Display the output of the getProducts method, and getBank method, then
-            - Loop through the following until the Open store option
-                - Prompt the player to do the following actions:
+            - Display the output of the getProducts method, and getBank method, and getWorker method,
+            then Loop through the following until the Open store option
+                - Prompt the player to input an integer corresponding to the following actions:
                     - (1) Buy products
                     - (2) Open store
                     - (3) Manage workers
@@ -48,7 +47,11 @@ CafeSimulationRunner class:
                 - If the user input is 1, then prompt the player to name a product in stock, and the quantity of the product,
                 then call the addProduct method and deduct the quantity.
                 - If the user input is 2, then call the openStore method.
-                - If the user input is 3, then
-                - If the user input is 4, then prompt the player to name a product, and declare a variable 'inputProduct'
+                - If the user input is 3, then prompt the player to input an integer corresponding to the following actions:
+                    - (1) Hire a worker
+                    - (2) Fire a worker
+                - Prompt the player to input the name of the occupation, and declare a String 'inputJob' and set it to
+                the user input, then prompt the player to input the amount to hire/fire. If
+                - If the user input is 4, then prompt the player to name a product, and declare a String 'inputProduct'
                 and set it to the user input, then prompt the player to set a price, and call the setPrice method with
                 'inputProduct' and the user input as the arguments for their respective parameters, from left to right.
