@@ -1,0 +1,54 @@
+CafeSimulation class:
+   - Imports:
+       - The abstract Dictionary class
+       - The Hashtable class for key-value pairs in arrays.
+   - Variables:
+       - private int difficulty set to 0 by default, which will be used to determine how hard the game will be.
+       - private double bank set to 0 by default, which will be how much money your cafe has.
+       - private double rent set to 0 by default, which will be how much money is deducted from your bank each time you
+       open the store.
+       - private Hashtable workers that uses a Hashtable to generate a dictionary with the occupation of a worker and
+       how many are working in that occupation.
+       - private Hashtable products that uses a Hashtable to generate a dictionary of the amount of each product the cafe
+       will have.
+       - private Hashtable prices that uses a Hashtable to generate a dictionary with the name of a product as a key and
+       the price of the product as its value.
+       - private final Hashtable stockPrices that uses a Hashtable to generate a dictionary with the name of each product
+       available in the game as the key and the corresponding price as the value.
+   - Methods:
+       - A CafeSimulation constructor that takes in a parameter 'difficulty', which will be used in arithmetic operations
+       to determine the difficulty of the game.
+       - A int getAmount method that will take in a String 'product' and look for the key named 'product' in products, then return
+       its value. If there is no key named 'product', it will instead print "Not a valid product".
+       - A void addProduct method that will take in a String 'product' and int 'amount' to look for the key in products
+       named the literal of 'product' and add 'amount' to its value. If there is no key named 'product', it will create a key
+       named 'product' and set its value to 'amount', and prompt the player to set a price using the changePrice method.
+       - A void setPrice method that will take in a String 'product' and double 'amount' to set the value of
+       key 'product' in products to 'amount'. If there is no key named 'product', it will instead print "Not a valid
+       product". If 'amount' is less than 0, it will instead print "Not a valid price".
+       - A double getBank method that will return the value of bank
+       - A Hashtable getProducts method that returns 'products'.
+       - A Hashtable getWorkers method that returns 'workers'.
+       - A Hashtable getStockPrice that takes in a String 'product' and searches for it in 'stockPrices', and returns
+       the value of the key 'product'. If there is no key named 'product', it will instead print "Not a valid product".
+CafeSimulationRunner class:
+   - Imports:
+       - The Scanner class for user input.
+   - Algorithm:
+       - Prompt the user for a difficulty from 1 to 3
+       - Construct a new instance of CafeSimulation called 'cafeSimulation' with the user input as the argument to the 'difficulty' parameter.
+       - Loop through the following until the output of the getBank method in cafeSimulation is below or equal to 0:
+            - Display the output of the getProducts method, and getBank method, then
+            - Loop through the following until the Open store option
+                - Prompt the player to do the following actions:
+                    - (1) Buy products
+                    - (2) Open store
+                    - (3) Manage workers
+                    - (4) Change prices
+                - If the user input is 1, then prompt the player to name a product in stock, and the quantity of the product,
+                then call the addProduct method and deduct the quantity.
+                - If the user input is 2, then call the openStore method.
+                - If the user input is 3, then
+                - If the user input is 4, then prompt the player to name a product, and declare a variable 'inputProduct'
+                and set it to the user input, then prompt the player to set a price, and call the setPrice method with
+                'inputProduct' and the user input as the arguments for their respective parameters, from left to right.
