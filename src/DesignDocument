@@ -3,20 +3,26 @@ CafeSimulation class:
        - The Hashtable class for key-value pairs in arrays.
    - Variables:
        - private int difficulty set to 0 by default, which will be used to determine how hard the game will be.
+       - private int days set to 0 by default, which will implement each time the store opens.
        - private double bank set to 0 by default, which will be how much money your cafe has.
        - private double rent set to 0 by default, which will be how much money is deducted from your bank each time you
        open the store.
+       - private final String[] availablePositions set to an array of strings representing a position a worker can take.
+       - private final String[] availableProducts set to an array of strings representing the names of products that
+       are available in the cafe simulation.
+       - private final Double[] availablePrices set to an array of numbers representing the price of its corresponding
+       index in availableProducts.
        - private Hashtable workers that uses a Hashtable to generate a dictionary with the occupation of a worker and
        how many are working in that occupation.
        - private Hashtable products that uses a Hashtable to generate a dictionary of the amount of each product the cafe
        will have.
        - private Hashtable prices that uses a Hashtable to generate a dictionary with the name of a product as a key and
        the price of the product as its value.
-       - private final Hashtable stockPrices that uses a Hashtable to generate a dictionary with the name of each product
+       - private Hashtable stockPrices that uses a Hashtable to generate a dictionary with the name of each product
        available in the game as the key and the corresponding price as the value.
    - Methods:
-       - A CafeSimulation constructor that takes in a parameter 'difficulty', which will be used in arithmetic operations
-       to determine the difficulty of the game.
+       - A CafeSimulation constructor that takes in a parameter 'difficulty', which sets the instance's 'difficulty' to
+       the argument of 'difficulty', bank to 100 / (1 + difficulty / 10.0), rent to 10 * (1 + difficulty / 10.0), adds
        - A int getAmount method that will take in a String 'product' and look for the key named 'product' in products, then return
        its value. If there is no key named 'product', it will instead print "Not a valid product".
        - A void addProduct method that will take in a String 'product' and int 'amount' to look for the key in products
@@ -25,8 +31,12 @@ CafeSimulation class:
        - A void setPrice method that will take in a String 'product' and double 'amount' to set the value of
        key 'product' in products to 'amount'. If there is no key named 'product', it will instead print "Not a valid
        product". If 'amount' is less than 0, it will instead print "Not a valid price".
-       - A double getBank method that will return the value of bank
+       - A void addWorker method that will take in a String 'occupation' and an int 'amount' to add 'amount' to the value
+       of key 'occupation' in workers.
+       - A double getBank method that will return the value of bank.
+       - A double getRent method that will return the value of rent.
        - A Hashtable getProducts method that returns 'products'.
+       - A Hashtable getPrices method that returns 'prices'.
        - A Hashtable getWorkers method that returns 'workers'.
        - A Hashtable getStockPrice that takes in a String 'product' and searches for it in 'stockPrices', and returns
        the value of the key 'product'. If there is no key named 'product', it will instead print "Not a valid product".
@@ -55,3 +65,4 @@ CafeSimulationRunner class:
                 - If the user input is 4, then prompt the player to name a product, and declare a String 'inputProduct'
                 and set it to the user input, then prompt the player to set a price, and call the setPrice method with
                 'inputProduct' and the user input as the arguments for their respective parameters, from left to right.
+       - Once the loop ends, the game will
