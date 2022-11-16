@@ -2,10 +2,10 @@ CafeSimulation class:
    - Imports:
        - The Hashtable class for key-value pairs in arrays.
    - Variables:
-       - private int difficulty set to 0 by default, which will be used to determine how hard the game will be.
+       - private int difficulty, which will be used to determine how hard the game will be.
        - private int days set to 0 by default, which will implement each time the store opens.
-       - private double bank set to 0 by default, which will be how much money your cafe has.
-       - private double rent set to 0 by default, which will be how much money is deducted from your bank each time you
+       - private double bank, which will be how much money your cafe has.
+       - private double rent, which will be how much money is deducted from your bank each time you
        open the store.
        - private final String[] availablePositions set to an array of strings representing a position a worker can take.
        - private final String[] availableProducts set to an array of strings representing the names of products that
@@ -35,10 +35,11 @@ CafeSimulation class:
        of key 'occupation' in workers.
        - A double getBank method that will return the value of bank.
        - A double getRent method that will return the value of rent.
+       - A double get
        - A Hashtable getProducts method that returns 'products'.
        - A Hashtable getPrices method that returns 'prices'.
        - A Hashtable getWorkers method that returns 'workers'.
-       - A Hashtable getStockPrice that takes in a String 'product' and searches for it in 'stockPrices', and returns
+       - A Hashtable getStockPrices that takes in a String 'product' and searches for it in 'stockPrices', and returns
        the value of the key 'product'. If there is no key named 'product', it will instead print "Not a valid product".
 CafeSimulationRunner class:
    - Imports:
