@@ -45,13 +45,11 @@ public class CafeSimulation {
         for(String item: this.AVAILABLE_POSITIONS) {
             workers.put(item, 0);
         }
-        for(String key : AVAILABLE_PRODUCTS) {
-            products.put(key, 0);
-            STOCK_PRICES.put(key, 0.0);
+        for(int i = 0; i < AVAILABLE_PRODUCTS.length; i++) {
+            products.put(AVAILABLE_PRODUCTS[i], 0);
+            STOCK_PRICES.put(AVAILABLE_PRODUCTS[i], AVAILABLE_PRICES[i]);
         }
-        for(Double value: AVAILABLE_PRICES) {
-
-        }
+        prices.putAll(STOCK_PRICES);
     }
     public void openStore() {
         this.bank -= this.rent;
@@ -92,5 +90,11 @@ public class CafeSimulation {
     }
     public Hashtable<String, Double> getStockPrices() {
         return STOCK_PRICES;
+    }
+    public void addProduct(String product, int value) {
+        products.put(product, products.get(product) + value);
+    }
+    public void changeWorker(String worker, int value) {
+        workers.put(worker, workers.get(worker) + value);
     }
 }
