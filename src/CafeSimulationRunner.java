@@ -4,7 +4,7 @@ public class CafeSimulationRunner {
     public static void main(String[] args) {
         Scanner userInput = new Scanner(System.in);
         System.out.println("What would you like the difficulty to be: ");
-        CafeSimulation cafeSimulation = new CafeSimulation(userInput.nextInt());
+        CafeSimulation cafeSimulation = new CafeSimulation(Integer.parseInt(userInput.nextLine()));
         String panel = "===============";
         while(cafeSimulation.getBank() > 0) {
             System.out.println("Products in stock: ");
@@ -20,13 +20,13 @@ public class CafeSimulationRunner {
                     "(2) Open store" + "\n" +
                     "(3) Manage workers" + "\n" +
                     "(4) Change prices");
-            int option = userInput.nextInt();
+            int option = Integer.parseInt(userInput.nextLine());
             if(option == 1) {
-                System.out.print("What product would you like to buy? ");
+                System.out.println("What product would you like to buy? ");
                 String productBuy = userInput.nextLine();
                 if(cafeSimulation.getProducts().containsKey(productBuy)) {
                     System.out.print("How many of " + productBuy + " would you like to buy?");
-                    cafeSimulation.getProducts().put(productBuy, userInput.nextInt());
+                    cafeSimulation.addProduct(productBuy, Integer.parseInt(userInput.nextLine()));
                 }
             } else if(option == 2) {
                 cafeSimulation.openStore();
