@@ -36,7 +36,7 @@ public class CafeSimulation {
     private Hashtable<String, Double> prices = new Hashtable<>();
 
     /**
-     * @param difficulty
+     * @param difficulty Acts as a multiplier for certain calculations. Higher is harder.
      */
     public CafeSimulation(int difficulty) {
         this.difficulty = difficulty;

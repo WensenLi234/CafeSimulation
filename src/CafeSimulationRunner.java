@@ -3,10 +3,7 @@ import java.util.Scanner;
 public class CafeSimulationRunner {
     public static void main(String[] args) {
         Scanner userInput = new Scanner(System.in);
-        System.out.println("What would you like the difficulty to be? \n" +
-                "(1) Easy \n" +
-                "(2) Normal \n" +
-                "(3) Hard");
+        System.out.println("What would you like the difficulty to be? \n (1) Easy \n (2) Normal \n (3) Hard");
         CafeSimulation cafeSimulation = new CafeSimulation(Integer.parseInt(userInput.nextLine()));
         String panel = "===============";
         while(cafeSimulation.getBank() > 0) {
@@ -34,7 +31,11 @@ public class CafeSimulationRunner {
             } else if(option == 2) {
                 cafeSimulation.openStore();
             } else if(option == 3) {
-                System.out.println("Which position would you like to manage? ");
+                System.out.println("Current workers: ");
+                for(String key : cafeSimulation.getWorkers().keySet()) {
+                    System.out.println(key + ": " + cafeSimulation.getProducts().get(key));
+                }
+                System.out.println("Which position would you like to manage? \n ");
             } else if(option == 4) {
                 System.out.println("What price would you like to change? ");
             } else {
