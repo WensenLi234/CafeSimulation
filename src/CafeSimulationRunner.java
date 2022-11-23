@@ -10,14 +10,14 @@ public class CafeSimulationRunner {
             System.out.println("Products in stock: ");
             System.out.println(panel);
             for(String key : cafeSimulation.getProducts().keySet()) {
-                System.out.println(key + ": " + cafeSimulation.getProducts().get(key));
+                System.out.println(key + ": " + cafeSimulation.getProducts().get(key) + "    $" + cafeSimulation.getPrices().get(key));
             }
             System.out.println(panel);
-            System.out.println("Current bank: " + cafeSimulation.getBank() + "\n" + "Current rent: " + cafeSimulation.getRent());
+            System.out.println("Current bank: $" + (int) (cafeSimulation.getBank() * 100) / 100.0 + "\n" + "Current rent: $" + (int) (cafeSimulation.getRent() * 100) / 100.0);
             System.out.println(panel);
             System.out.println("What do you want to do now?" + "\n" +
                     "(1) Buy products\n" +
-                    "(2) Open store\n" +
+                    "(2) Open cafe\n" +
                     "(3) Manage workers\n" +
                     "(4) Change prices");
             int option = Integer.parseInt(userInput.nextLine());
@@ -26,21 +26,46 @@ public class CafeSimulationRunner {
                 String productBuy = userInput.nextLine();
                 if(cafeSimulation.getProducts().containsKey(productBuy)) {
                     System.out.print("How many of " + productBuy + " would you like to buy? ");
-                    cafeSimulation.addProduct(productBuy, Integer.parseInt(userInput.nextLine()));
+                    int productCount = Integer.parseInt(userInput.nextLine());
+                    if(cafeSimulation.getBank() - productCount * cafeSimulation.getPrices().get(productBuy) >= 0) {
+                        cafeSimulation.addProduct(productBuy, productCount);
+                        cafeSimulation.changeBank(-1 * cafeSimulation.getPrices().get(productBuy) * productCount);
+                    } else {
+                        System.out.println("You cannot afford this much " + productBuy);
+                    }
                 }
             } else if(option == 2) {
                 cafeSimulation.openStore();
             } else if(option == 3) {
                 System.out.println("Current workers: ");
                 for(String key : cafeSimulation.getWorkers().keySet()) {
-                    System.out.println(key + ": " + cafeSimulation.getProducts().get(key));
+                    System.out.println(key + ": " + cafeSimulation.getWorkers().get(key));
                 }
-                System.out.println("Which position would you like to manage? \n ");
+                System.out.print("Which position would you like to manage? ");
+                String positionChoice = userInput.nextLine();
+                if(cafeSimulation.getWorkers().containsKey(positionChoice)) {
+                    System.out.println("Would you like to hire or fire workers? \n (1) Hire \n (2) Fire");
+                    if(Integer.parseInt(userInput.nextLine()) == 1) {
+                        System.out.println("How many would you like to hire? ");
+                        cafeSimulation.changeWorker(positionChoice, (Integer.parseInt(userInput.nextLine())));
+                    } else {
+                        System.out.println("How many would you like to fire? ");
+                        int fireCount = Integer.parseInt(userInput.nextLine());
+                        if(cafeSimulation.getWorkers().get(positionChoice) - fireCount >= 0) {
+                            cafeSimulation.changeWorker(positionChoice, -1 *(Integer.parseInt(userInput.nextLine())));
+                        } else {
+                            System.out.println("That is more than the current amount of workers in that position!");
+                        }
+                    }
+                } else {
+                    System.out.println("Not a valid option.");
+                }
             } else if(option == 4) {
-                System.out.println("What price would you like to change? ");
+                System.out.println("work in progress ");
             } else {
                 System.out.println("Not a valid choice.");
             }
         }
+        System.out.println("Your cafe is bankrupt! Your cafe will be out of business.");
     }
 }

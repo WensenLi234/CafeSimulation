@@ -1,7 +1,9 @@
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Hashtable;
 public class CafeSimulation {
+
     private int difficulty;
     private int days = 0;
     private double bank;
@@ -36,22 +38,31 @@ public class CafeSimulation {
     private Hashtable<String, Double> prices = new Hashtable<>();
 
     /**
-     * @param difficulty Acts as a multiplier for certain calculations. Higher is harder.
+     * @param difficulty Acts as a multiplier or divisor for certain calculations. Higher is harder.
      */
     public CafeSimulation(int difficulty) {
         this.difficulty = difficulty;
-        this.bank = 100 / (1 + difficulty / 10.0);
+        this.bank = (100 / (1 + difficulty / 10.0));
         this.rent = 10;
         for(String item: this.AVAILABLE_POSITIONS) {
             workers.put(item, 0);
         }
         for(int i = 0; i < AVAILABLE_PRODUCTS.length; i++) {
-            products.put(AVAILABLE_PRODUCTS[i], 0);
+            products.put(AVAILABLE_PRODUCTS[i], (int) (5 * (3.0 / difficulty)));
+            prices.put(AVAILABLE_PRODUCTS[i], AVAILABLE_PRICES[i] * 2);
             STOCK_PRICES.put(AVAILABLE_PRODUCTS[i], AVAILABLE_PRICES[i]);
         }
-        prices.putAll(STOCK_PRICES);
     }
     public void openStore() {
+        for(String product: this.products.keySet()) {
+            System.out.println(product);
+            int amountSold = (int) (Math.random() * 10 + (workers.get("Barista")) / difficulty);
+            if(amountSold > products.get(product)) {
+                amountSold = products.get(product);
+            }
+            products.put(product, products.get(product) - amountSold);
+            bank += prices.get(product) * amountSold;
+        }
         this.bank -= this.rent;
         this.rent *= 1 + this.difficulty / 10.0;
         this.days += 1;
@@ -77,14 +88,22 @@ public class CafeSimulation {
         return days;
     }
     /**
-     * @return returns a Hashtable
+     * @return returns a Hashtable representing each position and the number of workers in that position.
      */
     public Hashtable<String, Integer> getWorkers() {
         return workers;
     }
+
+    /**
+     * @return returns a Hashtable representing each product and the number of that product.
+     */
     public Hashtable<String, Integer> getProducts() {
         return products;
     }
+
+    /**
+     * @return
+     */
     public Hashtable<String, Double> getPrices() {
         return prices;
     }
@@ -96,5 +115,11 @@ public class CafeSimulation {
     }
     public void changeWorker(String worker, int value) {
         workers.put(worker, workers.get(worker) + value);
+    }
+    public void changeBank(double change) {
+        bank += change;
+    }
+    public void setRent(double result) {
+        rent = result;
     }
 }
