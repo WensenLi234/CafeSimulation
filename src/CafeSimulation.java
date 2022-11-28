@@ -5,7 +5,6 @@ import java.util.Hashtable;
 public class CafeSimulation {
 
     private int difficulty;
-    private int days = 0;
     private double bank;
     private double rent;
     private final String[] AVAILABLE_POSITIONS = {
@@ -32,7 +31,7 @@ public class CafeSimulation {
             3.49, // Latte
             3.49, // Cappucino
     };
-    private Hashtable<String, Double> STOCK_PRICES = new Hashtable<>();
+    private Hashtable<String, Double> stockPrices = new Hashtable<>();
     private Hashtable<String, Integer> products = new Hashtable<>();
     private Hashtable<String, Integer> workers = new Hashtable<>();
     private Hashtable<String, Double> prices = new Hashtable<>();
@@ -50,9 +49,13 @@ public class CafeSimulation {
         for(int i = 0; i < AVAILABLE_PRODUCTS.length; i++) {
             products.put(AVAILABLE_PRODUCTS[i], (int) (5 * (3.0 / difficulty)));
             prices.put(AVAILABLE_PRODUCTS[i], AVAILABLE_PRICES[i] * 2);
-            STOCK_PRICES.put(AVAILABLE_PRODUCTS[i], AVAILABLE_PRICES[i]);
+            stockPrices.put(AVAILABLE_PRODUCTS[i], AVAILABLE_PRICES[i]);
         }
     }
+
+    /**
+     * Opens the store. This will serve as the end of the gameplay loop.
+     */
     public void openStore() {
         for(String product: this.products.keySet()) {
             System.out.println(product);
@@ -65,7 +68,6 @@ public class CafeSimulation {
         }
         this.bank -= this.rent;
         this.rent *= 1 + this.difficulty / 10.0;
-        this.days += 1;
     }
     /**
      * @return returns a double that represents the amount of money the object has left.
@@ -79,13 +81,6 @@ public class CafeSimulation {
      */
     public double getRent() {
         return rent;
-    }
-
-    /**
-     * @return returns an int that represents the number of days that have passed (number of times the openStore method is called).
-     */
-    public int getDays() {
-        return days;
     }
     /**
      * @return returns a Hashtable representing each position and the number of workers in that position.
@@ -102,24 +97,40 @@ public class CafeSimulation {
     }
 
     /**
-     * @return
+     * @return returns a Hashtable representing each product and its respective price.
      */
     public Hashtable<String, Double> getPrices() {
         return prices;
     }
+
+    /**
+     * @return returns a Hashtable representing each product and its respective stock price.
+     */
     public Hashtable<String, Double> getStockPrices() {
-        return STOCK_PRICES;
+        return stockPrices;
     }
+    /**
+     * @param product The key in products.
+     * @param value the value added onto product.
+     */
     public void addProduct(String product, int value) {
         products.put(product, products.get(product) + value);
     }
+
+    /**
+     * @param worker The key in workers.
+     * @param value The value added onto worker.
+     */
     public void changeWorker(String worker, int value) {
         workers.put(worker, workers.get(worker) + value);
     }
+
+    /**
+     * Adds change to the bank.
+     * @param change amount that will be added onto bank.
+     */
     public void changeBank(double change) {
         bank += change;
     }
-    public void setRent(double result) {
-        rent = result;
-    }
+
 }

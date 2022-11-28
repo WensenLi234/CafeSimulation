@@ -10,7 +10,15 @@ public class CafeSimulationRunner {
             System.out.println("Products in stock: ");
             System.out.println(panel);
             for(String key : cafeSimulation.getProducts().keySet()) {
-                System.out.println(key + ": " + cafeSimulation.getProducts().get(key) + "    $" + cafeSimulation.getPrices().get(key));
+                System.out.print(key + ": " + cafeSimulation.getProducts().get(key));
+                int numSpaces = 30;
+                for(int i = 0; i < key.length();i++) {
+                    numSpaces -= 1;
+                }
+                for(int i = 0; i < numSpaces; i++) {
+                    System.out.print(" ");
+                }
+                System.out.println("$" + cafeSimulation.getPrices().get(key));
             }
             System.out.println(panel);
             System.out.println("Current bank: $" + (int) (cafeSimulation.getBank() * 100) / 100.0 + "\n" + "Current rent: $" + (int) (cafeSimulation.getRent() * 100) / 100.0);
@@ -18,8 +26,7 @@ public class CafeSimulationRunner {
             System.out.println("What do you want to do now?" + "\n" +
                     "(1) Buy products\n" +
                     "(2) Open cafe\n" +
-                    "(3) Manage workers\n" +
-                    "(4) Change prices");
+                    "(3) Manage workers\n");
             int option = Integer.parseInt(userInput.nextLine());
             if(option == 1) {
                 System.out.println("What product would you like to buy? ");
@@ -27,9 +34,9 @@ public class CafeSimulationRunner {
                 if(cafeSimulation.getProducts().containsKey(productBuy)) {
                     System.out.print("How many of " + productBuy + " would you like to buy? ");
                     int productCount = Integer.parseInt(userInput.nextLine());
-                    if(cafeSimulation.getBank() - productCount * cafeSimulation.getPrices().get(productBuy) >= 0) {
+                    if(cafeSimulation.getBank() - productCount * cafeSimulation.getStockPrices().get(productBuy) >= 0) {
                         cafeSimulation.addProduct(productBuy, productCount);
-                        cafeSimulation.changeBank(-1 * cafeSimulation.getPrices().get(productBuy) * productCount);
+                        cafeSimulation.changeBank(-1 * cafeSimulation.getStockPrices().get(productBuy) * productCount);
                     } else {
                         System.out.println("You cannot afford this much " + productBuy);
                     }
@@ -60,8 +67,6 @@ public class CafeSimulationRunner {
                 } else {
                     System.out.println("Not a valid option.");
                 }
-            } else if(option == 4) {
-                System.out.println("work in progress ");
             } else {
                 System.out.println("Not a valid choice.");
             }
