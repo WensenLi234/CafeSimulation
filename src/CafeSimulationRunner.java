@@ -26,7 +26,7 @@ public class CafeSimulationRunner {
             System.out.println("What do you want to do now?" + "\n" +
                     "(1) Buy products\n" +
                     "(2) Open cafe\n" +
-                    "(3) Manage workers\n");
+                    "(3) Manage workers");
             int option = Integer.parseInt(userInput.nextLine());
             if(option == 1) {
                 System.out.println("What product would you like to buy? ");
