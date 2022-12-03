@@ -12,8 +12,7 @@ CafeSimulation class:
        are available in the cafe simulation.
        - private final Double[] availablePrices set to an array of numbers representing the price of its corresponding
        index in availableProducts.
-       - private Hashtable workers that uses a Hashtable to generate a dictionary with the occupation of a worker and
-       how many are working in that occupation.
+       - private int workers that represents the number of workers in the cafe.
        - private Hashtable products that uses a Hashtable to generate a dictionary of the amount of each product the cafe
        will have.
        - private Hashtable prices that uses a Hashtable to generate a dictionary with the name of a product as a key and
@@ -24,14 +23,15 @@ CafeSimulation class:
        - A CafeSimulation constructor that takes in a parameter 'difficulty', which sets the instance's 'difficulty' to
        the argument of 'difficulty', bank to 100 / (1 + difficulty / 10.0), rent to 10, and adds 5 * (3 / difficulty) to
        each product in products.
+       - An openStore method that does various calculations to serve as the main gameplay loop. Products will be sold
+       randomly, the rent will be deducted from the bank, and then multiplied.
        - A int getAmount method that will take in a String 'product' and look for the key named 'product' in products, then return
        its value.
        - A void addProduct method that will take in a String 'product' and int 'amount' to look for the key in products
        named the literal of 'product' and add 'amount' to its value.
        - A void setPrice method that will take in a String 'product' and double 'amount' to set the value of
        key 'product' in products to 'amount'.
-       - A void addWorker method that will take in a String 'occupation' and an int 'amount' to add 'amount' to the value
-       of key 'occupation' in workers.
+       - A void addWorker method that will take in an int 'amount' to add 'amount' to workers.
        - A double getBank method that will return the value of bank.
        - A double getRent method that will return the value of rent.
        - A Hashtable getProducts method that returns 'products'.
@@ -57,7 +57,6 @@ CafeSimulationRunner class:
                 - If the user input is 3, then prompt the player to input an integer corresponding to the following actions:
                     - (1) Hire a worker
                     - (2) Fire a worker
-                - Prompt the player to input the name of the occupation, whether to hire (+) or fire(-), and how much to
-                hire/fire, then call the changeWorker method with the respective occupation as 'worker' and amount as
+                - Prompt the player whether to hire (+) or fire(-), and how much to hire/fire, then call the changeWorker method with the amount as
                 'value'.
        - Once the loop ends, the program will print "Your cafe is bankrupt! Your cafe will be out of business."

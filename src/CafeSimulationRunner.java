@@ -44,32 +44,23 @@ public class CafeSimulationRunner {
             } else if(option == 2) {
                 cafeSimulation.openStore();
             } else if(option == 3) {
-                System.out.println("Current workers: ");
-                for(String key : cafeSimulation.getWorkers().keySet()) {
-                    System.out.println(key + ": " + cafeSimulation.getWorkers().get(key));
-                }
-                System.out.print("Which position would you like to manage? ");
-                String positionChoice = userInput.nextLine();
-                if(cafeSimulation.getWorkers().containsKey(positionChoice)) {
-                    System.out.println("Would you like to hire or fire workers? \n (1) Hire \n (2) Fire");
-                    if(Integer.parseInt(userInput.nextLine()) == 1) {
-                        System.out.println("How many would you like to hire? ");
-                        cafeSimulation.changeWorker(positionChoice, (Integer.parseInt(userInput.nextLine())));
+                System.out.println("Current number of workers: " + cafeSimulation.getWorkers());
+                System.out.println("Would you like to hire or fire workers? \n (1) Hire \n (2) Fire");
+                if(Integer.parseInt(userInput.nextLine()) == 1) {
+                    System.out.println("How many would you like to hire? ");
+                    cafeSimulation.changeWorkers((Integer.parseInt(userInput.nextLine())));
+                } else {
+                    System.out.println("How many would you like to fire? ");
+                    int fireCount = Integer.parseInt(userInput.nextLine());
+                    if(cafeSimulation.getWorkers() - fireCount >= 0) {
+                        cafeSimulation.changeWorkers(-1 *(Integer.parseInt(userInput.nextLine())));
                     } else {
-                        System.out.println("How many would you like to fire? ");
-                        int fireCount = Integer.parseInt(userInput.nextLine());
-                        if(cafeSimulation.getWorkers().get(positionChoice) - fireCount >= 0) {
-                            cafeSimulation.changeWorker(positionChoice, -1 *(Integer.parseInt(userInput.nextLine())));
-                        } else {
-                            System.out.println("That is more than the current amount of workers in that position!");
-                        }
+                        System.out.println("That is more than the current amount of workers in that position!");
                     }
+                }
                 } else {
                     System.out.println("Not a valid option.");
                 }
-            } else {
-                System.out.println("Not a valid choice.");
-            }
         }
         System.out.println("Your cafe is bankrupt! Your cafe will be out of business.");
     }

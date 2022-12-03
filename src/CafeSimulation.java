@@ -3,6 +3,7 @@ import java.util.Hashtable;
 public class CafeSimulation {
 
     private int difficulty;
+    private int workers;
     private double bank;
     private double rent;
     private final String[] AVAILABLE_POSITIONS = {
@@ -31,7 +32,6 @@ public class CafeSimulation {
     };
     private Hashtable<String, Double> stockPrices = new Hashtable<>();
     private Hashtable<String, Integer> products = new Hashtable<>();
-    private Hashtable<String, Integer> workers = new Hashtable<>();
     private Hashtable<String, Double> prices = new Hashtable<>();
 
     /**
@@ -41,9 +41,7 @@ public class CafeSimulation {
         this.difficulty = difficulty;
         this.bank = (100 / (1 + difficulty / 10.0));
         this.rent = 10;
-        for(String item: this.AVAILABLE_POSITIONS) {
-            workers.put(item, 0);
-        }
+        this.workers = 0;
         for(int i = 0; i < AVAILABLE_PRODUCTS.length; i++) {
             products.put(AVAILABLE_PRODUCTS[i], (int) (5 * (3.0 / difficulty)));
             prices.put(AVAILABLE_PRODUCTS[i], AVAILABLE_PRICES[i] * 2);
@@ -57,10 +55,11 @@ public class CafeSimulation {
     public void openStore() {
         for(String product: this.products.keySet()) {
             System.out.println(product);
-            int amountSold = (int) (Math.random() * 10 + (workers.get("Barista")) / difficulty);
+            int amountSold = (int) (Math.random() * 10 + workers / difficulty);
             if(amountSold > products.get(product)) {
                 amountSold = products.get(product);
             }
+
             products.put(product, products.get(product) - amountSold);
             bank += prices.get(product) * amountSold;
         }
@@ -83,7 +82,7 @@ public class CafeSimulation {
     /**
      * @return returns a Hashtable representing each position and the number of workers in that position.
      */
-    public Hashtable<String, Integer> getWorkers() {
+    public int getWorkers() {
         return workers;
     }
 
@@ -116,11 +115,11 @@ public class CafeSimulation {
     }
 
     /**
-     * @param worker The key in workers.
-     * @param value The value added onto worker.
+     * @param value The value added onto workers.
      */
-    public void changeWorker(String worker, int value) {
-        workers.put(worker, workers.get(worker) + value);
+    public void changeWorkers(int value) {
+
+        workers += value;
     }
 
     /**
@@ -130,5 +129,4 @@ public class CafeSimulation {
     public void changeBank(double change) {
         bank += change;
     }
-
 }
