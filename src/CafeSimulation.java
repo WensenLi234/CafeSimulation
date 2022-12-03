@@ -4,6 +4,7 @@ public class CafeSimulation {
 
     private int difficulty;
     private int workers;
+    private double wage;
     private double bank;
     private double rent;
     private final String[] AVAILABLE_POSITIONS = {
@@ -42,6 +43,7 @@ public class CafeSimulation {
         this.bank = (100 / (1 + difficulty / 10.0));
         this.rent = 10;
         this.workers = 0;
+        this.wage = 25.0 * difficulty;
         for(int i = 0; i < AVAILABLE_PRODUCTS.length; i++) {
             products.put(AVAILABLE_PRODUCTS[i], (int) (5 * (3.0 / difficulty)));
             prices.put(AVAILABLE_PRODUCTS[i], AVAILABLE_PRICES[i] * 2);
@@ -55,15 +57,14 @@ public class CafeSimulation {
     public void openStore() {
         for(String product: this.products.keySet()) {
             System.out.println(product);
-            int amountSold = (int) (Math.random() * 10 + workers / difficulty);
+            int amountSold = (int) (Math.random() * 5 + workers / difficulty);
             if(amountSold > products.get(product)) {
                 amountSold = products.get(product);
             }
-
             products.put(product, products.get(product) - amountSold);
             bank += prices.get(product) * amountSold;
         }
-        this.bank -= this.rent;
+        this.bank -= this.rent + this.workers;
         this.rent *= 1 + this.difficulty / 10.0;
     }
     /**
@@ -84,6 +85,9 @@ public class CafeSimulation {
      */
     public int getWorkers() {
         return workers;
+    }
+    public double getWage() {
+        return wage;
     }
 
     /**

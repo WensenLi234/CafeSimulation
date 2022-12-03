@@ -45,6 +45,7 @@ public class CafeSimulationRunner {
                 cafeSimulation.openStore();
             } else if(option == 3) {
                 System.out.println("Current number of workers: " + cafeSimulation.getWorkers());
+                System.out.println("Wage: " + cafeSimulation.getWage());
                 System.out.println("Would you like to hire or fire workers? \n (1) Hire \n (2) Fire");
                 if(Integer.parseInt(userInput.nextLine()) == 1) {
                     System.out.println("How many would you like to hire? ");

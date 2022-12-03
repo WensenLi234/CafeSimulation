@@ -3,7 +3,8 @@ CafeSimulation class:
        - The Hashtable class for key-value pairs in arrays.
    - Variables:
        - private int difficulty, which will be used to determine how hard the game will be.
-       - private int days set to 0 by default, which will implement each time the store opens.
+       - private int workers that represents the number of workers in the cafe.
+       - private double wage that represents how much money is deducted from bank per worker when the player opens the cafe
        - private double bank, which will be how much money your cafe has.
        - private double rent, which will be how much money is deducted from your bank each time you
        open the store.
@@ -12,7 +13,6 @@ CafeSimulation class:
        are available in the cafe simulation.
        - private final Double[] availablePrices set to an array of numbers representing the price of its corresponding
        index in availableProducts.
-       - private int workers that represents the number of workers in the cafe.
        - private Hashtable products that uses a Hashtable to generate a dictionary of the amount of each product the cafe
        will have.
        - private Hashtable prices that uses a Hashtable to generate a dictionary with the name of a product as a key and
@@ -25,13 +25,12 @@ CafeSimulation class:
        each product in products.
        - An openStore method that does various calculations to serve as the main gameplay loop. Products will be sold
        randomly, the rent will be deducted from the bank, and then multiplied.
-       - A int getAmount method that will take in a String 'product' and look for the key named 'product' in products, then return
-       its value.
        - A void addProduct method that will take in a String 'product' and int 'amount' to look for the key in products
        named the literal of 'product' and add 'amount' to its value.
        - A void setPrice method that will take in a String 'product' and double 'amount' to set the value of
        key 'product' in products to 'amount'.
        - A void addWorker method that will take in an int 'amount' to add 'amount' to workers.
+       - A double getWage method that returns the value of wage.
        - A double getBank method that will return the value of bank.
        - A double getRent method that will return the value of rent.
        - A Hashtable getProducts method that returns 'products'.
@@ -54,7 +53,8 @@ CafeSimulationRunner class:
                 - If the user input is 1, then prompt the player to name a product in stock, and the quantity of the product,
                 then call the addProduct method and deduct the quantity.
                 - If the user input is 2, then call the openStore method.
-                - If the user input is 3, then prompt the player to input an integer corresponding to the following actions:
+                - If the user input is 3, then display the number of workers at the cafe and their daily wage, then
+                prompt the player to input an integer corresponding to the following actions:
                     - (1) Hire a worker
                     - (2) Fire a worker
                 - Prompt the player whether to hire (+) or fire(-), and how much to hire/fire, then call the changeWorker method with the amount as
